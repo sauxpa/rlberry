@@ -25,9 +25,15 @@ class BanditWithSimplePolicy(AgentWithSimplePolicy):
 
     def __init__(self, env, **kwargs):
         AgentWithSimplePolicy.__init__(self, env, **kwargs)
-        self.n_arms = self.env.action_space.n
-        self.arms = np.arange(self.n_arms)
         self.total_time = 0
+
+    @property
+    def n_arms(self):
+        return self.env.action_space.n
+
+    @property
+    def arms(self):
+        return np.arange(self.n_arms)
 
     def fit(self, budget=None, **kwargs):
         """
